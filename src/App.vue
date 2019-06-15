@@ -1,28 +1,96 @@
+
+
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- <h2 v-text="this.data.message"></h2> -->
+    <h2 v-text="message">H2 문맥입니다</h2>
+    <h5>SUM : {{sum}}</h5>
+    <h5>GET : {{amount}}</h5>
+    
+    <h4># methods SUM</h4>
+    <input type="text" v-model="num">
+    <p>1부터 입력된 수까지의 합 : <span>{{sum}}</span></p>
+    <h5>SUM : {{sumNumber()}}</h5>
+    <h5>SUM : {{sumNumber()}}</h5>
+    <h5>SUM : {{sumNumber()}}</h5>
+
+
+
+    <h4># computed SUM</h4>
+    
+    <h5>SUM : {{sum}}</h5>    
+    <h5>SUM : {{sum}}</h5>    
+    <h5>SUM : {{sum}}</h5>  
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+
 
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
+  name: 'App',
+  data: function(){
+    return {
+      message: '니호호호',
+      num: 5,
+      amt: 123456666,
+      number: 0
+    }
+  },
+  computed: {
+    sum() {
+      console.log(Date.now());
+      var n = Number(this.num);
+      if ( n < 1) return 0;
+      return ((1+n) * n) / 2;
+    },
+    amount: {
+      get() {
+        let s = new String(""+this.amt);
+        let result = "";
+        let num = 0;
+        for (let i = s.length -1 ; i >= 0 ; i--) {
+          result = s[i] + result;
+          if ( num % 3 === 2 && i !== 0)
+            result = ',' + result;
+            num++;
+        }
+        return result;
+      },
+      set() {
+        if (typeof(amt) === "string") {
+          let result = parseInt(amt.replace(/,/g,""))
+          if (isNaN(result)) {
+            this.amt = 0;
+          } else {
+            this.amt = result;
+          }
+        } else if (typeof(amt) === "number") {
+          this.amt = amt;
+        }
+      }
+    }
+  },
+  methods: {
+    sumNumber() {
+      console.log("메소드 SUM : ",Date.now());
+      let n = Number(this.number)  ;
+      if ( n === 0 ) return 0;
+      if ( Number.isNaN(n) || n < 1 ) return "숫자를 입력하세요";
+      return ((1 + n) * n) / 2;
+    }
+  },
+  
+
+
 }
 </script>
 
-<style>
+<style lang="scss">
+$black: red;
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  border: 1px solid $black;
 }
 </style>
