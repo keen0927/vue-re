@@ -2,41 +2,54 @@
 
 <template>
   <div id="app">
-    x: <input type="text" v-model="x"><br />
-    y: <input type="text" v-model="y"><br />
-    Sum : {{sum}}
-
+    <p>이름 : <input type="text" v-model="name" placeholder="두자 이상 입력"></p>
+    <table id="list">
+      <thead>
+        <tr>
+          <th>번호</th>
+          <th>이름</th>
+          <th>전화번호</th>
+          <th>주소</th>
+        </tr>
+      </thead>
+      <tbody id="contacts">
+        <tr v-for="contact in contactlist">
+          <td>{{contact.no}}</td>
+          <td>{{contact.name}}</td>
+          <td>{{contact.tel}}</td>
+          <td>{{contact.address}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div v-show="isProcessing === true">조회중</div>
     
   </div>
 </template>
 
 <script>
 
-
-
 export default {
   name: 'App',
   data: function(){
     return {
-      x: 0,
-      y: 0,
-      sum: 0  
+      name: '',
+      isProcessing: false,
+      contactlist: []
     }
   },
   watch: {
-    x(v) {
-      console.log("X 변경");
-      let result = Number(v) + Number(this.y);
-      if (isNaN(result)) this.sum = 0;
-      else this.sum = result;
-    },
-    y(v) {
-      console.log('Y 변경');
-      this.y = v;
-      var result = Number(this.x) + Number(v);
-      if (isNaN(result)) this.sum = 0;
-      else this.sum = result;
+    name: function(val) {
+      if (val.length >= 2) {
+        this.axiosContacts();
+      } else {
+        this.contactlist = [];
+      }
     }
+  },
+  methods: {
+    axiosContacts: _.debounce(function(){
+
+    },1000);
   }
   
   
@@ -46,9 +59,17 @@ export default {
 </script>
 
 <style lang="scss">
-$black: red;
-
-#app {
-  border: 1px solid $black;
+#list {
+  width: 400px;
+  border: 1px solid #000;
+  border-collapse: collapse;
+  td, th {
+    border: 1px solid #000;
+    text-align: center;
+  }
+  thead > tr {
+    color: yellow;
+    background-color: purple;
+  }
 }
 </style>
