@@ -1,28 +1,12 @@
 
 
 <template>
-  <div id="app">
-    <p>이름 : <input type="text" v-model="name" placeholder="두자 이상 입력"></p>
-    <table id="list">
-      <thead>
-        <tr>
-          <th>번호</th>
-          <th>이름</th>
-          <th>전화번호</th>
-          <th>주소</th>
-        </tr>
-      </thead>
-      <tbody id="contacts">
-        <tr v-for="contact in contactlist">
-          <td>{{contact.no}}</td>
-          <td>{{contact.name}}</td>
-          <td>{{contact.tel}}</td>
-          <td>{{contact.address}}</td>
-        </tr>
-      </tbody>
-    </table>
-    <div v-show="isProcessing === true">조회중</div>
-    
+  <div id="app" @contextmenu.prevent="ctxStop">
+    <p><input id="textInput" type="text" @keyup.13="deposit" v-model="amount"></p>
+    <p v-show="isValidate === true">올바른 수를 입력하세요</p>
+    <button id="deposit" @click="deposit()">예금</button>
+    <button id="withdraw" @click="withdraw()">인출</button>
+    <h3>계좌잔고 : {{balance}}</h3>
   </div>
 </template>
 
@@ -32,44 +16,54 @@ export default {
   name: 'App',
   data: function(){
     return {
-      name: '',
-      isProcessing: false,
-      contactlist: []
-    }
-  },
-  watch: {
-    name: function(val) {
-      if (val.length >= 2) {
-        this.axiosContacts();
-      } else {
-        this.contactlist = [];
-      }
+      amount: 0,
+      balance: 0,
+      isValidate: false
     }
   },
   methods: {
-    axiosContacts: _.debounce(function(){
-
-    },1000);
-  }
-  
-  
-
-
+    // deposit() {
+    //   this.balance += parseInt(this.amount);
+    //   this.amount = 0;
+    // },
+    // withdraw() {
+    //   this.balance -= parseInt(this.amount);
+    //   this.amount = 0;
+    // }    
+    deposit(e) {
+      var amt = parseInt(this.amount);
+      if (amt <= 0) {
+        this.isValidate = true
+        this.amount = 0;
+        document.getElementById('#textInput');
+      } else {
+        this.balance += amt;
+        this.isValidate = false;
+      }
+    },
+    withdraw() {
+      var amt = parseInt(this.amount);
+      if (amt <= 0) {
+        this.isValidate = true;
+        this.amount = 0;
+        document.getElementById('#textInput');
+      } else {
+        this.balance -= amt;
+        this.isValidate = false;
+      }
+    },
+    // ctxStop() {
+    //   // e.preventDefault();
+    //   console.log('111');
+    // }
+    ctxStop: function(e) {
+      e.preventDefault();
+    }
+    
+  },
 }
 </script>
 
 <style lang="scss">
-#list {
-  width: 400px;
-  border: 1px solid #000;
-  border-collapse: collapse;
-  td, th {
-    border: 1px solid #000;
-    text-align: center;
-  }
-  thead > tr {
-    color: yellow;
-    background-color: purple;
-  }
-}
+
 </style>
