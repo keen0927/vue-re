@@ -1,7 +1,12 @@
 
 <template>
     <div>
-        이름 : <input type="text" @kepup.enter="handlerEnter">
+        이름 : <input 
+                type="text"
+                v-model.trim="name"
+                :placeholder="placeholder"
+                @kepup.enter="keyupEvent"
+                />
     </div>
 </template>
 

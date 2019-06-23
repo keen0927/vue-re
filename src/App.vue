@@ -1,16 +1,19 @@
 <template>
     <div>
-        <SearchContact />
+        <EventBusChildA />
+        <EventBusChildB />
     </div>
 </template>
 
 <script>
-import SearchContact from './containers/SearchContact.vue';
+import EventBusChildA from './components/EventBusChildA.vue';
+import EventBusChildB from './components/EventBusChildB.vue';
 
     export default {
         name: 'App',
         components: {
-            SearchContact,
+            EventBusChildA,
+            EventBusChildB,
         }
     }
 </script>
