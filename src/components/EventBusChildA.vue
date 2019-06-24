@@ -25,6 +25,22 @@
                 
             }
         },
+        created () {
+            console.log('created');
+            function foodReport(name,age,...favoriteFoods) {
+                console.log(name);
+                console.log(age);
+                console.log(favoriteFoods);
+            }
+            foodReport('keen','37','피자','바베큐');
+            
+            let url = "http://sample.bmaster.kro.kr/contacts_long/search/ja";
+            
+            fetch(url)
+                .then((response) => response.json())
+                .then((json) => console.log(json))
+                .catch((error) => console.log(error.message))
+        }
     }
 </script>
 

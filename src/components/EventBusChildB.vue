@@ -18,7 +18,7 @@
             }
         },
         created () {
-            eventBud.$on('click1',this.child1Click)
+            eventBus.$on('click1',this.child1Click)
         },
         methods: {
             child1Click(time) {
