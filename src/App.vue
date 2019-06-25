@@ -1,20 +1,19 @@
 <template>
     <div>
-        <EventBusChildA />
-        <EventBusChildB />
+        <chatContainer />
     </div>
 </template>
 
 <script>
-import EventBusChildA from './components/EventBusChildA.vue';
-import EventBusChildB from './components/EventBusChildB.vue';
+
+
+import chatContainer from './containers/chatContainer';
 
     export default {
         name: 'App',
         components: {
-            EventBusChildA,
-            EventBusChildB,
-        }
+            chatContainer,
+        },
     }
 </script>
 
