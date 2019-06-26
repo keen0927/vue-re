@@ -1,30 +1,18 @@
 <template>
     <div>
-        <!-- <ul>
-            <li 
-                v-for="(todo, index) in todos" 
-                :key="index">
-                {{ todo.text }}
-                <a-button 
-                    type="dashed"
-                    size="small">
-                    삭제
-                </a-button>
-            </li>
-        </ul> -->
-
         <a-list
             size="small"
             bordered
             :dataSource="todos">
             <a-list-item 
                 slot="renderItem"
-                slot-scope="todo, index">
+                slot-scope="todo, index"
+                :key="index">
                 {{todo.text}}
-                {{index}}
                 <a-button 
                     type="dashed"
-                    size="small">
+                    size="small"
+                    @click="handlerListDelete(index)">
                     삭제
                 </a-button>                
             </a-list-item>
@@ -35,12 +23,19 @@
 </template>
 
 <script>
+
     export default {
         name: 'chatInput',
         props: [
             "todos",
             "message"
-        ]
+        ],
+        methods: {
+            handlerListDelete(index) {
+                this.$emit('handlerListDelete',index)
+            }
+        },
+
     }
 </script>
 
