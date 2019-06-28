@@ -1,6 +1,8 @@
 <template>
     <div>
         <chatContainer />
+        <hr />
+        <gugudan />
     </div>
 </template>
 
@@ -8,11 +10,13 @@
 
 
 import chatContainer from './containers/chatContainer';
+import gugudan from './containers/gugudan';
 
     export default {
         name: 'App',
         components: {
             chatContainer,
+            gugudan
         },
     }
 </script>
