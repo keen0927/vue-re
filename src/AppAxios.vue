@@ -23,9 +23,9 @@ import axios from 'axios';
             fetchContacts() {
                 axios({
                     method: 'GET',
-                    url: 'http://sample.bmaster.kro.kr/api/contacts',
+                    url: 'http://sample.bmaster.kro.kr/contacts',
                     params: { 
-                        pageno: 1,
+                        pageno: 2,
                         pagesize: 5
                     }
                 })
