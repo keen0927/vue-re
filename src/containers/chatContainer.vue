@@ -1,18 +1,21 @@
 <template>
     <div class="chat-container">
+        <!-- <form @submit.prevent="sendAjax"> -->
+            <chatList 
+                @handlerListDelete="handlerListDelete"
+                :todos="todoList"
+                message="안녕하세요"
+            />
+            <a-divider orientation="left">내용을 입력 하세요</a-divider>
+            <chatInput 
+                @onSearchTotal="handlerListAdd"
+                :todoInput="todoInput"
+                @updateValue="handlerUpdateValue"
+                class="mt-2"
+            />
+            <button type="button" @click="sendAjax">서브밋 테스트</button>
+        <!-- </form> -->
         
-        <chatList 
-            @handlerListDelete="handlerListDelete"
-            :todos="todoList"
-            message="안녕하세요"
-        />
-        <a-divider orientation="left">내용을 입력 하세요</a-divider>
-        <chatInput 
-            @onSearchTotal="handlerListAdd"
-            :todoInput="todoInput"
-            @updateValue="handlerUpdateValue"
-            class="mt-2"
-        />
         
     </div>
 </template>
@@ -51,6 +54,9 @@ import chatInput from '../components/chatInput';
             },
             handlerUpdateValue(value) {
                 console.log('value : ',value);
+            },
+            98() {
+                console.log('서브밋 테스트');
             }
         },
     }
