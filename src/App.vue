@@ -1,24 +1,17 @@
 <template>
     <div>
-        <chatContainer />
-        <hr />
-        <gugudan />
+        <BottomSheet />
     </div>
 </template>
 
 <script>
-
-
-import chatContainer from './containers/chatContainer';
-import gugudan from './containers/gugudan';
-
-    export default {
-        name: 'App',
-        components: {
-            chatContainer,
-            gugudan
-        },
-    }
+import BottomSheet from './components/BottomSheet';
+export default {
+    name: 'App',
+    components: {
+        BottomSheet
+    },
+}
 </script>
 
 <style lang="scss" scoped>
