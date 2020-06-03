@@ -1,18 +1,23 @@
 <template>
     <div class="chat-container">
         
-        <chatList 
-            @handlerListDelete="handlerListDelete"
-            :todos="todoList"
-            message="안녕하세요"
-        />
-        <a-divider orientation="left">내용을 입력 하세요</a-divider>
-        <chatInput 
-            @onSearchTotal="handlerListAdd"
-            :todoInput="todoInput"
-            @updateValue="handlerUpdateValue"
-            class="mt-2"
-        />
+            <chatList 
+                @handlerListDelete="handlerListDelete"
+                :todos="todoList"
+                message="안녕하세요"
+            />
+            <a-divider orientation="left">내용을 입력 하세요</a-divider>
+            <!-- <chatInput 
+                @onSearchTotal="handlerListAdd"
+                :todoInput="todoInput"
+                @updateValue="handlerUpdateValue"
+                class="mt-2"
+            /> -->
+            <chatInput 
+                v-model="todoInput"
+                @updateValue="handlerAddList"
+                class="mt-2"
+            />
         
     </div>
 </template>
@@ -51,6 +56,9 @@ import chatInput from '../components/chatInput';
             },
             handlerUpdateValue(value) {
                 console.log('value : ',value);
+            },
+            handlerAddList(e) {
+                this.todoList.push({text: e})
             }
         },
     }

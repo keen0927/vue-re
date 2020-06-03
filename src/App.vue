@@ -15,5 +15,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.content-area {
+    display: flex;
+}
+.content-area.hide {
+    display: none;
+}
+button.active {
+    background: red;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    BottomSheet
+    BottomSheet2
   </div>
 </template>
 
