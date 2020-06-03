@@ -1,6 +1,7 @@
 <template>
     <div>
         <BottomSheet />
+        컨텐츠
     </div>
 </template>
 
@@ -15,13 +16,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.content-area {
-    display: flex;
-}
-.content-area.hide {
-    display: none;
-}
-button.active {
-    background: red;
+body {
+    border: 3px solid #000;
 }
 </style>
