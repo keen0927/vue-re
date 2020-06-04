@@ -1,8 +1,8 @@
 <template>
-  <div class="bottom-sheet-wrap">
+  <div class="bottom-sheet-wrap" :class="{opend: isOpen}">
     <div class="dimm-element"></div>
-    <div class="bottom-sheet-content" >
-      <div class="drag-area" ref="dragArea"></div>
+    <div class="bottom-sheet-content">
+      <div class="drag-area" ref="dragArea" @touchmove="ddd($event)"></div>
     </div>
   </div>
 </template>
@@ -11,18 +11,55 @@
 export default {
   name: 'BottomSheet',
   methods: {
-    closeBottomSheet(e) {
+    // closeBottomSheet(e) {
       // const offsetY = this.offsetTop;
       // console.log(`offsetY : ${offsetY}`);
       // console.log(window.innerHeight);
       // console.log(e.target);
+    // },
+    ddd(e) {
+
+      // const {} = e.target
+      // const target = this.$refs.dragArea;
+      const windowHeight = window.innerHeight;
+      const bottomSheetHeight = e.target.parentElement.clientHeight;
+      const dragHeight = e.target.clientHeight;
+      const bottomSheetHalfHeight = bottomSheetHeight / 2;      
+      const getPositionY = Math.floor(e.touches[0].clientY);
+      
+      if (getPositionY >= windowHeight - bottomSheetHalfHeight) {
+        this.isOpen = false;
+        console.log('1');
+      }
+      
+    }
+  },
+  data() {
+    return {
+      isOpen: true
     }
   },
   mounted() {
-    const target = this.$refs.dragArea;
-    target.addEventListener('touchmove',function(e) {
-      console.log(Math.floor(e.targetTouches[0].screenY));
-    });
+    // const target = this.$refs.dragArea;
+    // const windowHeight = window.innerHeight;
+    // const bottomSheetHeight = target.parentElement.clientHeight;
+    // const dragHeight = target.clientHeight;
+
+    // const bottomSheetHalfHeight = bottomSheetHeight / 2;
+    // console.log('windowHeight : ', windowHeight);
+    // console.log('bottomSheetHeight : ', bottomSheetHeight);
+    // console.log('dragHeight : ', dragHeight);
+
+    // target.addEventListener('touchmove',function(e) {
+    
+    // target.addEventListener('touchmove',function(e) {
+    //   const getPositionY = Math.floor(e.touches[0].clientY);
+      
+    //   if (getPositionY >= windowHeight - bottomSheetHalfHeight) {
+    //     this.isOpen = false;
+    //     console.log('1');
+    //   }
+    // });
   }
 }
 </script>
@@ -38,7 +75,6 @@ export default {
   width: 100%;
   height: 100%;
   background-color: rgba(0,0,0,0.4);
-  
 
   .dimm-element {
     position: absolute;
@@ -65,6 +101,12 @@ export default {
 
     .drag-area {
       height: 20px;
+      border: 1px solid #000;
+    }
+  }
+
+  &.opend {
+    .bottom-sheet-content {
       border: 1px solid #000;
     }
   }
